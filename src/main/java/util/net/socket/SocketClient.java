@@ -25,14 +25,13 @@ public class SocketClient {
 
         @Override
         public void run() {
-            InputStreamReader isr = null;
-            BufferedReader br = null;
+            BufferedReader read = null;
             try {
-                isr = new InputStreamReader(s.getInputStream());
-                br = new BufferedReader(isr);
+                read = new BufferedReader(new InputStreamReader(s.getInputStream()));
+                String line = null;
                 while(true){
-                    while(isr.ready()){
-                        logger.info("客户端接收：" +br.readLine());
+                    while((line = read.readLine()) != null){
+                        logger.info("客户端接收：" + line);
                     }
                 }
             } catch (IOException e) {
@@ -77,8 +76,7 @@ public class SocketClient {
     }
 
     public static void main(String[] args) {
-//        SocketClient client = new SocketClient();
-//        client.startClient("127.0.0.1",8000);
-        System.out.println(UUID.randomUUID().toString());
+        SocketClient client = new SocketClient();
+        client.startClient("127.0.0.1",8000);
     }
 }
