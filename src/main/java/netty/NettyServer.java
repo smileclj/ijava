@@ -18,8 +18,8 @@ public class NettyServer {
             ServerBootstrap serverBootstrap = new ServerBootstrap();
             // server端采用简洁的连写方式，client端采用分段普通写法。
             serverBootstrap.group(bossGroup, workerGroup)
-                    .channel(NioServerSocketChannel. class )
-                    .childHandler( new ChannelInitializer<SocketChannel>() {
+                    .channel(NioServerSocketChannel.class)
+                    .childHandler(new ChannelInitializer<SocketChannel>() {
                         @Override
                         public void initChannel(SocketChannel ch)
                                 throws Exception {
