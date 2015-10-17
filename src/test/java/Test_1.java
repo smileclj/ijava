@@ -1,8 +1,8 @@
+import com.alibaba.fastjson.JSON;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by wana on 2015/10/17.
@@ -20,5 +20,12 @@ public class Test_1 {
         list2.add(1);
         list2.add(2);
         System.out.println(StringUtils.join(list2,","));
+    }
+
+    @Test
+    public void fastjson(){
+        Map<String,Object> params = new HashMap<>();
+        params.put("date",new Date());
+        System.out.println(JSON.toJSONString(params));
     }
 }
