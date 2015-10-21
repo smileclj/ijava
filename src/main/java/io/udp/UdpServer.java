@@ -38,8 +38,7 @@ public class UdpServer
                 // 判断inPacket.getData()和inBuff是否是同一个数组  
                 System.out.println(inBuff == inPacket.getData());  
                 // 将接收到的内容转换成字符串后输出  
-                System.out.println(new String(inBuff  
-                    , 0 , inPacket.getLength()));  
+                System.out.println(new String(inBuff, 0 , inPacket.getLength()));
                 // 从字符串数组中取出一个元素作为发送数据  
                 byte[] sendData = books[i % 4].getBytes();  
                 // 以指定的字节数组作为发送数据，以刚接收到的DatagramPacket的  

@@ -15,6 +15,7 @@
         <slf4j.version>1.5.11</slf4j.version>
         <logback.version>0.9.20</logback.version>
         <junit.version>4.11</junit.version>
+        <zxing.version>3.2.1</zxing.version>
     </properties>
 
     <dependencies>
@@ -67,18 +68,29 @@
             <version>${logback.version}</version>
         </dependency>
 
-    <dependency>
-        <groupId>ch.qos.logback</groupId>
-        <artifactId>logback-classic</artifactId>
-        <version>${logback.version}</version>
-    </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>${logback.version}</version>
+        </dependency>
 
-    <dependency>
-        <groupId>io.netty</groupId>
-        <artifactId>netty-all</artifactId>
-        <version>4.0.28.Final</version>
-    </dependency>
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-all</artifactId>
+            <version>4.0.28.Final</version>
+        </dependency>
 
+        <!--zxing-->
+        <dependency>
+            <groupId>com.google.zxing</groupId>
+            <artifactId>core</artifactId>
+            <version>${zxing.version}</version></dependency>
+
+        <dependency>
+            <groupId>com.google.zxing</groupId>
+            <artifactId>javase</artifactId>
+            <version>${zxing.version}</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>

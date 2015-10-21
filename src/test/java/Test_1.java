@@ -2,6 +2,9 @@ import com.alibaba.fastjson.JSON;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 
+import java.io.File;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.*;
 
 /**
@@ -25,7 +28,21 @@ public class Test_1 {
     @Test
     public void fastjson(){
         Map<String,Object> params = new HashMap<>();
-        params.put("date",new Date());
+        params.put("date", new Date());
         System.out.println(JSON.toJSONString(params));
+    }
+
+    @Test
+    public void testUri(){
+        try {
+            URI uri = new URI("file:/D:/uri.txt");
+            File file = new File(uri);
+            System.out.println(file.getName());
+            System.out.println(file.getAbsolutePath());
+//            System.out.println(Test_1.class.getResource("test.txt").toURI());
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+
     }
 }
