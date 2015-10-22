@@ -45,4 +45,49 @@ public class Test_1 {
         }
 
     }
+
+    private List<Object> division(List<String> lists,int num,int limit){
+        List<Object> os = new ArrayList<>();
+        for(int i=0;i<num;i++){
+            List<String> subList = null;
+            try{
+                subList = lists.subList(num*i, limit-1);
+            }catch(Exception e){
+                subList = lists.subList(num*i, lists.size()-num*i-1);
+            }
+            os.add(subList);
+        }
+        return os;
+    }
+
+    @Test
+    public void t(){
+//        System.out.println((int)Math.ceil((double)5/2));
+        List<String> lists = new ArrayList<>(450);
+        System.out.println(lists.subList(400,599));
+    }
+
+    @Test
+    public void tt(){
+        List<String> lists = new ArrayList<>();
+        for(int i = 0;i<450;i++){
+            lists.add(""+i);
+        }
+        List<Object> result = division(lists,3,200);
+        List<Object> os = new ArrayList<>();
+        int num = 3;
+        int limit = 200;  //tasknum
+        for(int i=0;i<num;i++){
+            List<String> subList = null;
+            try{
+                subList = lists.subList(limit*i, limit*i+limit);
+            }catch(Exception e){
+                subList = lists.subList(limit*i, lists.size());
+            }
+            os.add(subList);
+        }
+        System.out.println(os);
+    }
+
+
 }
