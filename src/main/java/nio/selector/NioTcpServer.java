@@ -29,7 +29,7 @@ public class NioTcpServer extends Thread {
             Selector selector = Selector.open();  //打开选择器
             ServerSocketChannel channel = ServerSocketChannel.open();  //打开通道
             channel.configureBlocking(false);  //非阻塞
-            channel.bind(inetSocketAddress);
+            channel.socket().bind(inetSocketAddress);
             channel.register(selector, SelectionKey.OP_ACCEPT);  // 向通道注册选择器和对应事件标识
             logger.info("server started");
             while(true){

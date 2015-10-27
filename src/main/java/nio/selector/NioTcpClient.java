@@ -13,7 +13,7 @@ import java.nio.channels.SocketChannel;
  *  
  * @author shirdrn 
  */  
-public class NioTcpClient {
+public class NioTcpClient extends Thread{
     private final Logger log = LoggerFactory.getLogger(NioTcpClient.class.getName());
     private InetSocketAddress inetSocketAddress;  
       
@@ -46,10 +46,15 @@ public class NioTcpClient {
         } catch (IOException e) {
             e.printStackTrace();  
         }  
-    }  
-      
+    }
+
+    @Override
+    public void run() {
+
+    }
+
     public static void main(String[] args) {
         String requestData = "Actions speak louder than words!";
-        new NioTcpClient("localhost", 9999).send(requestData);
+        new NioTcpClient("localhost", 9999).start();
     }  
 }  
