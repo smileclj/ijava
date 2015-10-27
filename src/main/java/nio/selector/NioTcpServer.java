@@ -12,27 +12,34 @@ import java.util.Iterator;
 import java.util.Set;
 
 /**
- * Created by wana on 2015/10/26.
+ * Created by clj on 2015/10/26.
  */
 public class NioTcpServer extends Thread {
     private final Logger logger = LoggerFactory.getLogger(NioTcpServer.class);
     private InetSocketAddress inetSocketAddress;
-    private Handler handler = new ServerHandler();
+    private ServerHandler handler;
+    private Selector selector;
+    private ServerSocketChannel serverChannel;
 
-    public NioTcpServer(String hostname, int port) {
-        inetSocketAddress = new InetSocketAddress(hostname,port);
+    public NioTcpServer(int port,ServerHandler handler) {
+        this.inetSocketAddress = new InetSocketAddress("127.0.0.1",port);
+        this.handler = handler;
+        try {
+            selector = Selector.open();  //打开选择器
+            serverChannel = ServerSocketChannel.open();  //打开通道
+            serverChannel.socket().bind(inetSocketAddress);
+            serverChannel.configureBlocking(false);  //非阻塞
+            serverChannel.register(selector, SelectionKey.OP_ACCEPT);  // 向通道注册选择器和对应事件标识
+            logger.info("server started");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void run() {
-        try {
-            Selector selector = Selector.open();  //打开选择器
-            ServerSocketChannel channel = ServerSocketChannel.open();  //打开通道
-            channel.configureBlocking(false);  //非阻塞
-            channel.socket().bind(inetSocketAddress);
-            channel.register(selector, SelectionKey.OP_ACCEPT);  // 向通道注册选择器和对应事件标识
-            logger.info("server started");
-            while(true){
+        while(true){
+            try {
                 int num = selector.select();  //阻塞
                 if(num > 0){ //如果有感兴趣的事件的至少一个通道
                     Set<SelectionKey> keys = selector.selectedKeys();
@@ -55,13 +62,13 @@ public class NioTcpServer extends Thread {
                         it.remove();
                     }
                 }
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 
     public static void main(String[] args) {
-        new NioTcpServer("localhost",9999).start();
+        new NioTcpServer(9999,new ServerHandler()).start();
     }
 }

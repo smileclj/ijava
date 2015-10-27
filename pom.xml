@@ -38,6 +38,13 @@
             <version>1.2.7</version>
         </dependency>
 
+        <!--poi-->
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>3.13</version>
+        </dependency>
+
         <!--zxing-->
         <dependency>
             <groupId>com.google.zxing</groupId>
