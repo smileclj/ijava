@@ -89,5 +89,15 @@ public class Test_1 {
         System.out.println(os);
     }
 
+    @Test
+    public void ttt(){
+        System.out.println((int)(Math.random() * 100000));
+    }
+
+    @Test
+    public void tttt(){
+        System.out.println(Double.toString(Math.random()));
+        System.out.println((Double.toString(Math.random())).substring(2, (2 + 6)));
+    }
 
 }
