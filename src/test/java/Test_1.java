@@ -96,8 +96,13 @@ public class Test_1 {
 
     @Test
     public void tttt(){
-        System.out.println(Double.toString(Math.random()));
-        System.out.println((Double.toString(Math.random())).substring(2, (2 + 6)));
+//        System.out.println(Double.toString(Math.random()));
+//        System.out.println((Double.toString(Math.random())).substring(2, (2 + 6)));
+        System.out.println("oyv8Qt1x84Ta_NAWhKMl8nUnF9Z0".length());
+        System.out.println("oyv8Qt1X8_JiMcI1d5rS8C3zPGHo".length());
+
     }
+
+
 
 }
