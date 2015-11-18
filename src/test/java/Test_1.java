@@ -103,6 +103,18 @@ public class Test_1 {
 
     }
 
+    @Test
+    public void now(){
+        System.out.println(new Date().getTime());
+//
+//        System.out.println(UUID.randomUUID().toString());
+//
+//        System.out.println(UUID.randomUUID().toString().length());
+//
+//        System.out.println(false & true);
 
+//        System.out.println(new Random().nextInt(-1));
+
+    }
 
 }
