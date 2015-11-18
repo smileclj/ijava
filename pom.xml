@@ -107,10 +107,15 @@
             <version>${logback.version}</version>
         </dependency>
 
+        <!--<dependency>-->
+            <!--<groupId>io.netty</groupId>-->
+            <!--<artifactId>netty-all</artifactId>-->
+            <!--<version>4.0.28.Final</version>-->
+        <!--</dependency>-->
         <dependency>
             <groupId>io.netty</groupId>
             <artifactId>netty-all</artifactId>
-            <version>4.0.28.Final</version>
+            <version>5.0.0.Alpha2</version>
         </dependency>
     </dependencies>
     <build>
