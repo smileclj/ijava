@@ -114,7 +114,7 @@ public class Test_1 {
 //        System.out.println(false & true);
 
 //        System.out.println(new Random().nextInt(-1));
-
+        System.out.println("".contains("a"));
     }
 
 }

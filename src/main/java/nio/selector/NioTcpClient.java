@@ -40,6 +40,14 @@ public class NioTcpClient extends Thread{
             }
         } catch (IOException e) {
             e.printStackTrace();
+            if(selector != null) {
+                try {
+                    selector.close();
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+            }
+
         }
     }  
       
