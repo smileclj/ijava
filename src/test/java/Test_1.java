@@ -6,6 +6,8 @@ import java.io.File;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.*;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * Created by wana on 2015/10/17.
@@ -115,6 +117,7 @@ public class Test_1 {
 
 //        System.out.println(new Random().nextInt(-1));
         System.out.println("".contains("a"));
+
     }
 
 
