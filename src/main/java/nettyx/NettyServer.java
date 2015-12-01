@@ -37,11 +37,17 @@ public class NettyServer {
                     @Override
                     public void initChannel(SocketChannel ch)
                             throws Exception {
-                        ch.pipeline().addLast( new HelloServerHandler());
+//                        ch.pipeline().addLast( new HelloServerHandler());
                     }
                 }).option(ChannelOption. SO_KEEPALIVE , true );
 
 //        ChannelFuture f = serverBootstrap.bind(8000).sync();
 //        f.channel().closeFuture().sync();
     }
+
+
+//    public void sendMessage(String toClientId,AbstractMessage message){
+//
+//    }
+
 }

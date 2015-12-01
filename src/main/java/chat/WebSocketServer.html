@@ -14,7 +14,7 @@ if (!window.WebSocket)
 	window.WebSocket = window.MozWebSocket;
 }
 if (window.WebSocket) {
-	socket = new WebSocket("ws://localhost:8888");
+	socket = new WebSocket("ws://localhost:9200");
 	socket.onmessage = function(event) {
 		var ta = document.getElementById('responseText');
 		ta.value += "\n";
