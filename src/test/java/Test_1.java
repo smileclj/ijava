@@ -1,8 +1,13 @@
 import com.alibaba.fastjson.JSON;
+import entity.JsonEntity;
+import entity.Student;
+import entity.Student2;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
+import util.ReflectionUtils;
 
 import java.io.File;
+import java.lang.reflect.InvocationTargetException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.*;
@@ -120,6 +125,30 @@ public class Test_1 {
 
     }
 
+    @Test
+    public void testJson(){
+        JsonEntity entity = new JsonEntity();
+        entity.setName("小明");
+        entity.setAge(20);
+        entity.setCreateTime(new Date());
+        entity.setFlag(true);
+        System.out.println(JSON.toJSON(entity));
+    }
 
+    @Test
+    public void testReflect(){
+        Student test = new Student();
+        test.setName("aaa");
+
+        Student2 test2 = new Student2();
+        try {
+            ReflectionUtils.copyPorperties(test2, test);
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
+        System.out.println(JSON.toJSONString(test2));
+    }
 
 }
