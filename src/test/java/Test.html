@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <input id="t" />
+    <button id="btn" onclick="m()">提交</button>
+    <script>
+        function m(){
+            var a = document.getElementById("t").value;
+            console.log(JSON.stringify({"a":a}));
+
+        }
+    </script>
+</body>
+</html>

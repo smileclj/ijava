@@ -1,5 +1,6 @@
 import com.alibaba.fastjson.JSON;
 import entity.JsonEntity;
+import entity.MessageEntity;
 import entity.Student;
 import entity.Student2;
 import org.apache.commons.lang3.StringUtils;
@@ -151,4 +152,11 @@ public class Test_1 {
         System.out.println(JSON.toJSONString(test2));
     }
 
+    @Test
+    public void jsonTest(){
+        MessageEntity message = new MessageEntity();
+        message.setContent("\\\\\"'\\\"\\'");
+        System.out.println(message.getContent());
+        System.out.println(JSON.toJSONString(message));
+    }
 }
