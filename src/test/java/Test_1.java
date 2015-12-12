@@ -4,7 +4,12 @@ import entity.MessageEntity;
 import entity.Student;
 import entity.Student2;
 import org.apache.commons.lang3.StringUtils;
+import org.joda.time.DateTime;
+import org.joda.time.Duration;
+import org.joda.time.Period;
+import org.joda.time.PeriodType;
 import org.junit.Test;
+import util.DateUtils;
 import util.ReflectionUtils;
 
 import java.io.File;
@@ -21,7 +26,7 @@ import java.util.concurrent.Executors;
 public class Test_1 {
 
     @Test
-    public void test1(){
+    public void test1() {
         List<String> list1 = new ArrayList<>();
         list1.add("1");
         list1.add("2");
@@ -30,18 +35,18 @@ public class Test_1 {
         List<Integer> list2 = new ArrayList<>();
         list2.add(1);
         list2.add(2);
-        System.out.println(StringUtils.join(list2,","));
+        System.out.println(StringUtils.join(list2, ","));
     }
 
     @Test
-    public void fastjson(){
-        Map<String,Object> params = new HashMap<>();
+    public void fastjson() {
+        Map<String, Object> params = new HashMap<>();
         params.put("date", new Date());
         System.out.println(JSON.toJSONString(params));
     }
 
     @Test
-    public void testUri(){
+    public void testUri() {
         try {
             URI uri = new URI("file:/D:/uri.txt");
             File file = new File(uri);
@@ -54,14 +59,14 @@ public class Test_1 {
 
     }
 
-    private List<Object> division(List<String> lists,int num,int limit){
+    private List<Object> division(List<String> lists, int num, int limit) {
         List<Object> os = new ArrayList<>();
-        for(int i=0;i<num;i++){
+        for (int i = 0; i < num; i++) {
             List<String> subList = null;
-            try{
-                subList = lists.subList(num*i, limit-1);
-            }catch(Exception e){
-                subList = lists.subList(num*i, lists.size()-num*i-1);
+            try {
+                subList = lists.subList(num * i, limit - 1);
+            } catch (Exception e) {
+                subList = lists.subList(num * i, lists.size() - num * i - 1);
             }
             os.add(subList);
         }
@@ -69,28 +74,28 @@ public class Test_1 {
     }
 
     @Test
-    public void t(){
+    public void t() {
 //        System.out.println((int)Math.ceil((double)5/2));
         List<String> lists = new ArrayList<>(450);
-        System.out.println(lists.subList(400,599));
+        System.out.println(lists.subList(400, 599));
     }
 
     @Test
-    public void tt(){
+    public void tt() {
         List<String> lists = new ArrayList<>();
-        for(int i = 0;i<450;i++){
-            lists.add(""+i);
+        for (int i = 0; i < 450; i++) {
+            lists.add("" + i);
         }
-        List<Object> result = division(lists,3,200);
+        List<Object> result = division(lists, 3, 200);
         List<Object> os = new ArrayList<>();
         int num = 3;
         int limit = 200;  //tasknum
-        for(int i=0;i<num;i++){
+        for (int i = 0; i < num; i++) {
             List<String> subList = null;
-            try{
-                subList = lists.subList(limit*i, limit*i+limit);
-            }catch(Exception e){
-                subList = lists.subList(limit*i, lists.size());
+            try {
+                subList = lists.subList(limit * i, limit * i + limit);
+            } catch (Exception e) {
+                subList = lists.subList(limit * i, lists.size());
             }
             os.add(subList);
         }
@@ -98,12 +103,12 @@ public class Test_1 {
     }
 
     @Test
-    public void ttt(){
-        System.out.println((int)(Math.random() * 100000));
+    public void ttt() {
+        System.out.println((int) (Math.random() * 100000));
     }
 
     @Test
-    public void tttt(){
+    public void tttt() {
 //        System.out.println(Double.toString(Math.random()));
 //        System.out.println((Double.toString(Math.random())).substring(2, (2 + 6)));
         System.out.println("oyv8Qt1x84Ta_NAWhKMl8nUnF9Z0".length());
@@ -112,7 +117,7 @@ public class Test_1 {
     }
 
     @Test
-    public void now(){
+    public void now() {
         System.out.println(new Date().getTime());
 //
 //        System.out.println(UUID.randomUUID().toString());
@@ -127,7 +132,7 @@ public class Test_1 {
     }
 
     @Test
-    public void testJson(){
+    public void testJson() {
         JsonEntity entity = new JsonEntity();
         entity.setName("小明");
         entity.setAge(20);
@@ -137,7 +142,7 @@ public class Test_1 {
     }
 
     @Test
-    public void testReflect(){
+    public void testReflect() {
         Student test = new Student();
         test.setName("aaa");
 
@@ -153,10 +158,35 @@ public class Test_1 {
     }
 
     @Test
-    public void jsonTest(){
+    public void jsonTest() {
         MessageEntity message = new MessageEntity();
         message.setContent("\\\\\"'\\\"\\'");
         System.out.println(message.getContent());
         System.out.println(JSON.toJSONString(message));
+    }
+
+    @Test
+    public void testDate() {
+//        long startTime = DateUtils.string2Date("2015-12-11 08:00:00","yyyy-MM-dd HH:mm:ss").getTime();
+//        long endTime = new Date().getTime();
+//        Calendar c = Calendar.getInstance();
+//        c.setTimeInMillis(endTime - startTime);
+//        StringBuilder sb = new StringBuilder();
+//        sb.append("总耗时：").append(c.get(Calendar.HOUR) + "时").append(c.get(Calendar.MINUTE) + "分").append(c.get(Calendar.SECOND) + "秒");
+//        System.out.println(sb.toString());
+
+        DateTime begin = new DateTime("2015-12-11 08:00:00");
+        DateTime end = DateTime.now();
+
+        //计算区间毫秒数
+        Duration d = new Duration(begin, end);
+        long time = d.getMillis();
+
+        //计算区间天数
+        Period p = new Period(begin, end, PeriodType.millis());
+
+        System.out.println(p.getDays());
+
+
     }
 }
