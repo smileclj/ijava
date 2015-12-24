@@ -1,60 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configuration>
+<configuration scan="true">
+    <property name="LOG_HOME" value="logs" />
+    <property name="LOG_NAME" value="ijava" />
 
     <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
-            <pattern>%d{HH:mm:ss.SSS} %-5level %logger{32}:%line -&gt; %msg%n</pattern>
-			<charset class="java.nio.charset.Charset">UTF-8</charset>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] [%-5level] %caller{1} - %msg%n</pattern>
         </encoder>
     </appender>
 
-    <appender name="R" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <!--See http://logback.qos.ch/manual/appenders.html#RollingFileAppender-->
-        <!--and http://logback.qos.ch/manual/appenders.html#TimeBasedRollingPolicy-->
-        <!--for further documentation-->
-        <file>../logs/toc.log</file>
+    <appender name="File" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_HOME}/${LOG_NAME}/${LOG_NAME}.log</file>
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
-            <pattern>%d{HH:mm:ss.SSS} %-5level %logger{32}:%line -&gt; %msg%n</pattern>
-			<charset class="java.nio.charset.Charset">UTF-8</charset>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] [%-5level] %logger{36}[%line] - %msg%n</pattern>
         </encoder>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>../logs/toc.log.%d{yyyy-MM-dd}.log.gz</fileNamePattern>
-        </rollingPolicy>
-    </appender>
-    
-    <appender name="DR" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <!--See http://logback.qos.ch/manual/appenders.html#RollingFileAppender-->
-        <!--and http://logback.qos.ch/manual/appenders.html#TimeBasedRollingPolicy-->
-        <!--for further documentation-->
-        <file>../logs/toc_detail.log</file>
-        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
-            <pattern>%d{HH:mm:ss.SSS}\t %msg%n</pattern>
-			<charset class="java.nio.charset.Charset">UTF-8</charset>
-        </encoder>
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>../logs/toc_detail.log.%d{yyyy-MM-dd}.log.gz</fileNamePattern>
-        </rollingPolicy>
-    </appender>
-    
-    <appender name="OR" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <!--See http://logback.qos.ch/manual/appenders.html#RollingFileAppender-->
-        <!--and http://logback.qos.ch/manual/appenders.html#TimeBasedRollingPolicy-->
-        <!--for further documentation-->
-        <file>../logs/toc_offline.log</file>
-        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
-            <pattern>%d{HH:mm:ss.SSS}\t %msg%n</pattern>
-			<charset class="java.nio.charset.Charset">UTF-8</charset>
-        </encoder>
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>../logs/toc_offline.log.%d{yyyy-MM-dd}.log.gz</fileNamePattern>
+            <fileNamePattern>${LOG_HOME}/${LOG_NAME}/%d{yyyy-MM-dd}/${LOG_NAME}-%d{yyyy-MM-dd}-%i.log.gz</fileNamePattern>
+            <MaxHistory>30</MaxHistory>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>2kb</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
         </rollingPolicy>
     </appender>
 
-    <!--<logger name="com.benhe.wolf" level="DEBUG" />-->
+    <logger name="java.sql.Connection" level="DEBUG" />
+    <logger name="java.sql.Statement" level="DEBUG" />
+    <logger name="java.sql.PreparedStatement" level="DEBUG" />
 
     <root level="INFO">
         <appender-ref ref="Console" />
-        <appender-ref ref="R" />
+        <appender-ref ref="File" />
     </root>
 
 </configuration>
