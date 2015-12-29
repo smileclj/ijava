@@ -5,20 +5,22 @@
 
     <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
-            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] [%-5level] %caller{1} - %msg%n</pattern>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] [%-5level] %caller{1} -> %msg%n</pattern>
         </encoder>
     </appender>
 
     <appender name="File" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- 支持多JVM同时操作同一个日志文件,多JVM同时操作同一个文件，则会出现日志不回滚、打出的日志串掉的场景-->
+        <!--<prudent>true</prudent>-->
         <file>${LOG_HOME}/${LOG_NAME}/${LOG_NAME}.log</file>
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
-            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] [%-5level] %logger{36}[%line] - %msg%n</pattern>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] [%-5level] %logger{80}[%L] -> %msg%n</pattern>
         </encoder>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <fileNamePattern>${LOG_HOME}/${LOG_NAME}/%d{yyyy-MM-dd}/${LOG_NAME}-%d{yyyy-MM-dd}-%i.log.gz</fileNamePattern>
             <MaxHistory>30</MaxHistory>
             <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
-                <maxFileSize>2kb</maxFileSize>
+                <maxFileSize>50MB</maxFileSize>
             </timeBasedFileNamingAndTriggeringPolicy>
         </rollingPolicy>
     </appender>
@@ -31,5 +33,4 @@
         <appender-ref ref="Console" />
         <appender-ref ref="File" />
     </root>
-
 </configuration>
